@@ -8,7 +8,7 @@ Class {
 { #category : 'rendering' }
 MyBlackKing >> renderPieceOn: aSquare [ [  
 
-	^ aSquare renderBlackKing 
+	^ aSquare renderBlackKing
 	
 ]
 ]
