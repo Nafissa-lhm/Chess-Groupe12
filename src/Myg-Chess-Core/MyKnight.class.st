@@ -12,9 +12,11 @@ MyKnight >> id [
 ]
 
 { #category : 'rendering' }
-MyKnight >> renderPieceOn: aSquare [
+MyKnight >> renderPieceOn: aSquare [ [  
 
-	^ aSquare renderKnight: self
+	^ self subclassResponsibility 
+	
+]
 ]
 
 { #category : 'rendering' }
