@@ -27,7 +27,7 @@ MyChessWhiteSquare >> renderBlackQueen [ [
 ]
 
 { #category : 'rendering' }
-MyChessWhiteSquare >> renderWhiteBishop[ [ 
+MyChessWhiteSquare >> renderWhiteBishop [ [ 
 	
 	^ 'B'
 ]
