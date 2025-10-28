@@ -6,9 +6,11 @@ Class {
 }
 
 { #category : 'rendering' }
-MyQueen >> renderPieceOn: aSquare [
+MyQueen >> renderPieceOn: aSquare [ [  
 
 	^ self subclassResponsibility 
+	
+]
 ]
 
 { #category : 'rendering' }
