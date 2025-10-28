@@ -6,7 +6,9 @@ Class {
 }
 
 { #category : 'rendering' }
-MyWhiteBishop >> renderPieceOn: aSquare [
+MyWhiteBishop >> renderPieceOn: aSquare [ [  
 
 	^ aSquare renderWhiteBishop 
+	
+]
 ]
