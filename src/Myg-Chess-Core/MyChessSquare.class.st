@@ -213,20 +213,6 @@ MyChessSquare >> renderBishop: aPiece [
 ]
 
 { #category : 'rendering' }
-MyChessSquare >> renderKing: aPiece [
-
-	^ aPiece isWhite
-		  ifFalse: [
-			  color isBlack
-				  ifFalse: [ 'L' ]
-				  ifTrue: [ 'l' ] ]
-		  ifTrue: [
-			  color isBlack
-				  ifFalse: [ 'K' ]
-				  ifTrue: [ 'k' ] ]
-]
-
-{ #category : 'rendering' }
 MyChessSquare >> renderKnight: aPiece [
 
 	^ aPiece isWhite
