@@ -16,10 +16,10 @@ MyKingRenderingTest >> testMyKingRendering [ [
 	whiteSquare := MyChessWhiteSquare new .
 	blackSquare := MyChessBlackSquare new.
 	
-	self assert: (blackKing renderOnPiece: whiteSquare) equals: 'L'.
-	self assert: (blackKing renderOnPiece: blackSquare ) equals: 'l'.
-	self assert: (whiteKing renderOnPiece: whiteSquare ) equals: 'K'.
-	self assert: (whiteKing renderOnPiece: blackSquare ) equals: 'k'.
+	self assert: (blackKing renderPieceOn: whiteSquare) equals: 'L'.
+	self assert: (blackKing renderPieceOn: blackSquare ) equals: 'l'.
+	self assert: (whiteKing renderPieceOn: whiteSquare ) equals: 'K'.
+	self assert: (whiteKing renderPieceOn: blackSquare ) equals: 'k'.
 	
 	
 	  ]
