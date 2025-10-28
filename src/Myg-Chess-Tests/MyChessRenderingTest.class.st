@@ -1,6 +1,6 @@
 Class {
-	#name : 'MyClass',
-	#superclass : 'Object',
+	#name : 'MyChessRenderingTest',
+	#superclass : 'TestCase',
 	#category : 'Myg-Chess-Tests',
 	#package : 'Myg-Chess-Tests'
 }
