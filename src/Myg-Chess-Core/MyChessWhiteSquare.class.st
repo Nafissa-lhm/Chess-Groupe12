@@ -6,6 +6,13 @@ Class {
 }
 
 { #category : 'rendering' }
+MyChessWhiteSquare >> renderBlackBishop [ [ 
+	
+	^ 'V'
+]
+]
+
+{ #category : 'rendering' }
 MyChessWhiteSquare >> renderBlackKing [ [ 
 	
 	^ 'L'
@@ -16,6 +23,13 @@ MyChessWhiteSquare >> renderBlackKing [ [
 MyChessWhiteSquare >> renderBlackQueen [ [ 
 	
 	^ 'W'
+]
+]
+
+{ #category : 'rendering' }
+MyChessWhiteSquare >> renderWhiteBishop[ [ 
+	
+	^ 'B'
 ]
 ]
 
