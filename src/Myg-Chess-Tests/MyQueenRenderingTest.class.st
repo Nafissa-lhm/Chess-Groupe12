@@ -8,18 +8,18 @@ Class {
 { #category : 'tests' }
 MyQueenRenderingTest >> testMyQueenRendering [ [ 
 	
-	| whiteQueen blackQueen whiteSquare blackSquare |
+	| whiteQueen blackQueen whiteQueenSquare blackQueenSquare |
 	
 	whiteQueen := MyWhiteQueen new.
 	blackQueen := MyBlackQueen new.
 	
-	whiteSquare := MyChessWhiteSquare new .
-	blackSquare := MyChessBlackSquare new.
+	whiteQueenSquare := MyChessWhiteSquare new .
+	blackQueenSquare := MyChessBlackSquare new.
 	
-	self assert: (blackQueen renderPieceOn: whiteSquare) equals: 'W'.
-	self assert: (blackQueen renderPieceOn: blackSquare ) equals: 'w'.
-	self assert: (whiteQueen renderPieceOn: whiteSquare ) equals: 'Q'.
-	self assert: (whiteQueen renderPieceOn: blackSquare ) equals: 'q'.
+	self assert: (blackQueen renderPieceOn: whiteQueenSquare ) equals: 'W'.
+	self assert: (blackQueen renderPieceOn: blackQueenSquare ) equals: 'w'.
+	self assert: (whiteQueen renderPieceOn: whiteQueenSquare ) equals: 'Q'.
+	self assert: (whiteQueen renderPieceOn: blackQueenSquare ) equals: 'q'.
 	
 	
 	  ]

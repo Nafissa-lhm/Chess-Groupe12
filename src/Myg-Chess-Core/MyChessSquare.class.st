@@ -199,20 +199,6 @@ MyChessSquare >> printOn: aStream [
 ]
 
 { #category : 'rendering' }
-MyChessSquare >> renderBishop: aPiece [
-
-	^ aPiece isWhite
-		  ifTrue: [
-			  color isBlack
-				  ifFalse: [ 'B' ]
-				  ifTrue: [ 'b' ] ]
-		  ifFalse: [
-			  color isBlack
-				  ifFalse: [ 'V' ]
-				  ifTrue: [ 'v' ] ]
-]
-
-{ #category : 'rendering' }
 MyChessSquare >> renderKnight: aPiece [
 
 	^ aPiece isWhite
@@ -237,20 +223,6 @@ MyChessSquare >> renderPawn: aPiece [
 			  color isBlack
 				  ifFalse: [ 'P' ]
 				  ifTrue: [ 'p' ] ]
-]
-
-{ #category : 'rendering' }
-MyChessSquare >> renderQueen: aPiece [
-
-	^ aPiece isWhite
-		  ifFalse: [
-			  color isBlack
-				  ifFalse: [ 'W' ]
-				  ifTrue: [ 'w' ] ]
-		  ifTrue: [
-			  color isBlack
-				  ifFalse: [ 'Q' ]
-				  ifTrue: [ 'q' ] ]
 ]
 
 { #category : 'rendering' }
