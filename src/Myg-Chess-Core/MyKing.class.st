@@ -1,94 +1,1 @@
-Class {
-	#name : 'MyKing',
-	#superclass : 'MyPiece',
-	#category : 'Myg-Chess-Core',
-	#package : 'Myg-Chess-Core'
-}
-
-{ #category : 'as yet unclassified' }
-MyKing >> attackingSquares [
-
-	^ self basicTargetSquares
-]
-
-{ #category : 'rendering' }
-MyKing >> basicTargetSquares [
-
-	"The king can move one square on each direction including diagonals"
-	^ {
-		square ifNotNil: #right.
-		square up ifNotNil: #right.
-		square ifNotNil: #up.
-		square up ifNotNil: #left.
-		square ifNotNil: #left.
-		square left ifNotNil: #down.
-		square ifNotNil: #down.
-		square down ifNotNil: #right
-	}
-]
-
-{ #category : 'accessing' }
-MyKing >> id [
-	
-	^ 'K'
-]
-
-{ #category : 'testing' }
-MyKing >> isCheckMated [
-	"We check if the opponent pieces target all my potential movements and myself"
-
-	| threatenedSquares |
-	threatenedSquares := self opponentPieces flatCollect: [ :e |
-		                     e attackingSquares ].
-
-	^ self legalTargetSquares isEmpty and: [
-		  threatenedSquares includes: self square ]
-]
-
-{ #category : 'testing' }
-MyKing >> isInCheck [
-	"We check if the opponent pieces target all my potential movements and myself"
-
-	| threatenedSquares |
-	threatenedSquares := self opponentPieces flatCollect: [ :e |
-		                     e attackingSquares ].
-
-	^ threatenedSquares includes: self square
-]
-
-{ #category : 'testing' }
-MyKing >> isKing [
-	
-	^ true
-]
-
-{ #category : 'accessing' }
-MyKing >> opponentPieces [
-
-	^ self board pieces select: [ :e |
-		  e notNil and: [ e color = color negated ] ]
-]
-
-{ #category : 'rendering' }
-MyKing >> renderPieceOn: aSquare [
-
-	^ aSquare renderKing: self
-]
-
-{ #category : 'rendering' }
-MyKing >> targetSquaresLegal: aBoolean [
-	"The king cannot move to threatened squares"
-
-	| threatenedSquares |
-	threatenedSquares := self opponentPieces flatCollect: [ :e |
-		                     e attackingSquares ].
-
-	^ self basicTargetSquares select: [ :s |
-		  s notNil and: [
-			  (threatenedSquares includes: s) not and: [
-				  s hasPiece not or: [ 
-					"The square has an opponent piece"
-					s contents color ~= color and: [ 
-						"Let's hope the piece is not defended"
-						threatenedSquares includes: s  ] ] ] ] ]
-]
+'From Pharo13.1.0SNAPSHOT of 20 October 2025 [Build information: Pharo-13.1.0+SNAPSHOT.build.707.sha.0d6f109a1a2d906ac9f69ca41e56c022b584bdfd (64 Bit)] on 29 October 2025 at 5:47:53.765 pm'!MyPiece subclass: #MyKing	instanceVariableNames: ''	classVariableNames: ''	package: 'Myg-Chess-Core'!!MyKing methodsFor: 'as yet unclassified' stamp: '2025-10-27T22:00:22.072+01:00'!attackingSquares	^ self basicTargetSquares! !!MyKing methodsFor: 'rendering' stamp: '2025-10-27T22:00:22.073+01:00'!basicTargetSquares	"The king can move one square on each direction including diagonals"	^ {		square ifNotNil: #right.		square up ifNotNil: #right.		square ifNotNil: #up.		square up ifNotNil: #left.		square ifNotNil: #left.		square left ifNotNil: #down.		square ifNotNil: #down.		square down ifNotNil: #right	}! !!MyKing methodsFor: 'rendering' stamp: '2025-10-27T22:00:22.077+01:00'!renderPieceOn: aSquare	^ aSquare renderKing: self! !!MyKing methodsFor: 'rendering' stamp: '2025-10-27T22:00:22.079+01:00'!targetSquaresLegal: aBoolean	"The king cannot move to threatened squares"	| threatenedSquares |	threatenedSquares := self opponentPieces flatCollect: [ :e |		                     e attackingSquares ].	^ self basicTargetSquares select: [ :s |		  s notNil and: [			  (threatenedSquares includes: s) not and: [				  s hasPiece not or: [ 					"The square has an opponent piece"					s contents color ~= color and: [ 						"Let's hope the piece is not defended"						threatenedSquares includes: s  ] ] ] ] ]! !!MyKing methodsFor: 'accessing' stamp: '2025-10-27T22:00:22.074+01:00'!id		^ 'K'! !!MyKing methodsFor: 'accessing' stamp: '2025-10-27T22:00:22.077+01:00'!opponentPieces	^ self board pieces select: [ :e |		  e notNil and: [ e color = color negated ] ]! !!MyKing methodsFor: 'testing' stamp: '2025-10-27T22:00:22.074+01:00'!isCheckMated	"We check if the opponent pieces target all my potential movements and myself"	| threatenedSquares |	threatenedSquares := self opponentPieces flatCollect: [ :e |		                     e attackingSquares ].	^ self legalTargetSquares isEmpty and: [		  threatenedSquares includes: self square ]! !!MyKing methodsFor: 'testing' stamp: '2025-10-27T22:00:22.074+01:00'!isInCheck	"We check if the opponent pieces target all my potential movements and myself"	| threatenedSquares |	threatenedSquares := self opponentPieces flatCollect: [ :e |		                     e attackingSquares ].	^ threatenedSquares includes: self square! !!MyKing methodsFor: 'testing' stamp: '2025-10-27T22:00:22.076+01:00'!isKing		^ true! !

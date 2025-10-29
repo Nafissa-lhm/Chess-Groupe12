@@ -1,34 +1,1 @@
-Class {
-	#name : 'MyKnight',
-	#superclass : 'MyPiece',
-	#category : 'Myg-Chess-Core',
-	#package : 'Myg-Chess-Core'
-}
-
-{ #category : 'accessing' }
-MyKnight >> id [
-	
-	^ 'N'
-]
-
-{ #category : 'rendering' }
-MyKnight >> renderPieceOn: aSquare [
-
-	^ aSquare renderKnight: self
-]
-
-{ #category : 'rendering' }
-MyKnight >> targetSquaresLegal: aBoolean [
-
-	^ {
-		  (square right ifNotNil: [ :p | p right ifNotNil: #up ]).
-		  (square right ifNotNil: [ :p | p right ifNotNil: #down ]).
-		  (square left ifNotNil: [ :p | p left ifNotNil: #up ]).
-		  (square left ifNotNil: [ :p | p left ifNotNil: #down ]).
-		  (square up ifNotNil: [ :p | p up ifNotNil: #left ]).
-		  (square up ifNotNil: [ :p | p up ifNotNil: #right ]).
-		  (square down ifNotNil: [ :p | p down ifNotNil: #left ]).
-		  (square down ifNotNil: [ :p | p down ifNotNil: #right ]) }
-		  select: [ :s |
-			  s notNil and: [ s hasPiece not or: [ s contents color ~= color ] ] ]
-]
+'From Pharo13.1.0SNAPSHOT of 20 October 2025 [Build information: Pharo-13.1.0+SNAPSHOT.build.707.sha.0d6f109a1a2d906ac9f69ca41e56c022b584bdfd (64 Bit)] on 29 October 2025 at 5:47:56.987 pm'!MyPiece subclass: #MyKnight	instanceVariableNames: ''	classVariableNames: ''	package: 'Myg-Chess-Core'!!MyKnight methodsFor: 'accessing' stamp: '2025-10-27T22:00:22.079+01:00'!id		^ 'N'! !!MyKnight methodsFor: 'rendering' stamp: '2025-10-29T17:41:41.046+01:00'!renderPieceOn: aSquare    "Vérifier que aSquare n'est pas nil"    ^ aSquare ifNotNil: [ aSquare renderKnight: self ] ifNil: [ 'K' ]! !!MyKnight methodsFor: 'rendering' stamp: '2025-10-27T22:00:22.082+01:00'!targetSquaresLegal: aBoolean	^ {		  (square right ifNotNil: [ :p | p right ifNotNil: #up ]).		  (square right ifNotNil: [ :p | p right ifNotNil: #down ]).		  (square left ifNotNil: [ :p | p left ifNotNil: #up ]).		  (square left ifNotNil: [ :p | p left ifNotNil: #down ]).		  (square up ifNotNil: [ :p | p up ifNotNil: #left ]).		  (square up ifNotNil: [ :p | p up ifNotNil: #right ]).		  (square down ifNotNil: [ :p | p down ifNotNil: #left ]).		  (square down ifNotNil: [ :p | p down ifNotNil: #right ]) }		  select: [ :s |			  s notNil and: [ s hasPiece not or: [ s contents color ~= color ] ] ]! !

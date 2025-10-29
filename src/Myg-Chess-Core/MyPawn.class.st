@@ -1,28 +1,1 @@
-Class {
-	#name : 'MyPawn',
-	#superclass : 'MyPiece',
-	#category : 'Myg-Chess-Core',
-	#package : 'Myg-Chess-Core'
-}
-
-{ #category : 'accessing' }
-MyPawn >> id [
-
-	^ 'P'
-]
-
-{ #category : 'rendering' }
-MyPawn >> renderPieceOn: aSquare [ 
-	
-	^ aSquare renderPawn: self
-]
-
-{ #category : 'rendering' }
-MyPawn >> targetSquaresLegal: aBoolean [
-
-	^ (self isWhite
-		   ifTrue: [ { square up } ]
-		   ifFalse: [ { square down } ]) select: [ :s |
-		  s notNil and: [
-			  s hasPiece not or: [ s contents color ~= color ] ] ]
-]
+'From Pharo13.1.0SNAPSHOT of 20 October 2025 [Build information: Pharo-13.1.0+SNAPSHOT.build.707.sha.0d6f109a1a2d906ac9f69ca41e56c022b584bdfd (64 Bit)] on 29 October 2025 at 5:48:00.128 pm'!MyPiece subclass: #MyPawn	instanceVariableNames: ''	classVariableNames: ''	package: 'Myg-Chess-Core'!!MyPawn methodsFor: 'accessing' stamp: '2025-10-27T22:00:22.083+01:00'!id	^ 'P'! !!MyPawn methodsFor: 'rendering' stamp: '2025-10-29T17:42:06.778+01:00'!renderPieceOn: aSquare    "Vérifier que aSquare n'est pas nil"    ^ aSquare ifNotNil: [ aSquare renderPawn: self ] ifNil: [ 'P' ]! !!MyPawn methodsFor: 'rendering' stamp: '2025-10-27T22:00:22.099+01:00'!targetSquaresLegal: aBoolean	^ (self isWhite		   ifTrue: [ { square up } ]		   ifFalse: [ { square down } ]) select: [ :s |		  s notNil and: [			  s hasPiece not or: [ s contents color ~= color ] ] ]! !
