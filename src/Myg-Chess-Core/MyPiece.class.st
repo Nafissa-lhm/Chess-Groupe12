@@ -1,245 +1,1 @@
-Class {
-	#name : 'MyPiece',
-	#superclass : 'Object',
-	#instVars : [
-		'color',
-		'square'
-	],
-	#category : 'Myg-Chess-Core',
-	#package : 'Myg-Chess-Core'
-}
-
-{ #category : 'constants' }
-MyPiece class >> black [
-
-	^ self new
-		  color: Color black;
-		  yourself
-]
-
-{ #category : 'constants' }
-MyPiece class >> white [
-
-	^ self new
-		  color: Color white;
-		  yourself
-]
-
-{ #category : 'as yet unclassified' }
-MyPiece >> attackingSquares [
-
-	^ self legalTargetSquares
-]
-
-{ #category : 'path commands' }
-MyPiece >> board [
-
-	^ square board
-]
-
-{ #category : 'rendering' }
-MyPiece >> collectSquares: aBlock [
-
-	^ self collectSquares: aBlock legal: false
-]
-
-{ #category : 'rendering' }
-MyPiece >> collectSquares: aBlock legal: shouldBeLegal [
-
-	^ self collectSquares: aBlock while: [ :aSquare |
-		  aSquare notNil and: [ shouldBeLegal ==> aSquare hasPiece not ] ]
-]
-
-{ #category : 'rendering' }
-MyPiece >> collectSquares: collectBlock while: untilBlock [
-
-	| targets next |
-	targets := OrderedCollection new.
-
-	"Collect up right"
-	next := square.
-	[ untilBlock value: (next := collectBlock value: next) ]
-		whileTrue: [ targets add: next ].
-
-	"If we can it the next piece, then add it too"
-	(next notNil and: [ next contents color ~= color ]) ifTrue: [ targets add: next ].
-
-	^ targets
-]
-
-{ #category : 'accessing' }
-MyPiece >> color [
-
-	^ color
-]
-
-{ #category : 'accessing' }
-MyPiece >> color: aColor [
-
-	color := aColor
-]
-
-{ #category : 'rendering' }
-MyPiece >> downFile [
-
-	^ self downFileLegal: false
-]
-
-{ #category : 'rendering' }
-MyPiece >> downFileLegal: aBoolean [
-
-	^ self collectSquares: [ :aSquare | aSquare down ] legal: aBoolean
-]
-
-{ #category : 'rendering' }
-MyPiece >> downLeftDiagonal [
-
-	^ self downLeftDiagonalLegal: false
-]
-
-{ #category : 'rendering' }
-MyPiece >> downLeftDiagonalLegal: aBoolean [
-
-	^ self
-		  collectSquares: [ :aSquare | aSquare down ifNotNil: #left ]
-		  legal: aBoolean
-]
-
-{ #category : 'rendering' }
-MyPiece >> downRightDiagonal [
-
-	^ self downRightDiagonalLegal: false
-]
-
-{ #category : 'rendering' }
-MyPiece >> downRightDiagonalLegal: aBoolean [
-
-	^ self
-		  collectSquares: [ :aSquare | aSquare down ifNotNil: #right ]
-		  legal: aBoolean
-]
-
-{ #category : 'accessing' }
-MyPiece >> id [
-
-	^ 'Q'
-]
-
-{ #category : 'testing' }
-MyPiece >> isKing [
-	
-	^ false
-]
-
-{ #category : 'testing' }
-MyPiece >> isPiece [
-	
-	^ true
-]
-
-{ #category : 'testing' }
-MyPiece >> isWhite [
-	
-	^ color isBlack not
-]
-
-{ #category : 'rendering' }
-MyPiece >> leftFile [
-
-	^ self leftFileLegal: false
-]
-
-{ #category : 'rendering' }
-MyPiece >> leftFileLegal: aBoolean [
-
-	^ self collectSquares: [ :aSquare | aSquare left ] legal: aBoolean
-]
-
-{ #category : 'path commands' }
-MyPiece >> legalTargetSquares [
-
-	^ self targetSquaresLegal: true
-]
-
-{ #category : 'path commands' }
-MyPiece >> moveTo: aSquare [
-
-	(self legalTargetSquares includes: aSquare) ifFalse: [ ^ self ].
-
-	square emptyContents.
-	square := aSquare.
-	aSquare contents: self
-]
-
-{ #category : 'rendering' }
-MyPiece >> rightFile [
-
-	^ self rightFileLegal: false
-]
-
-{ #category : 'rendering' }
-MyPiece >> rightFileLegal: aBoolean [
-
-	^ self collectSquares: [ :aSquare | aSquare right ] legal: aBoolean
-]
-
-{ #category : 'accessing' }
-MyPiece >> square [
-	^ square
-]
-
-{ #category : 'accessing' }
-MyPiece >> square: aMyChessSquare [ 
-	
-	square := aMyChessSquare
-]
-
-{ #category : 'rendering' }
-MyPiece >> targetSquares [
-
-	^ self targetSquaresLegal: false
-]
-
-{ #category : 'rendering' }
-MyPiece >> targetSquaresLegal: aBoolean [
-
-	self subclassResponsibility
-]
-
-{ #category : 'rendering' }
-MyPiece >> upFile [
-
-	^ self upFileLegal: false
-]
-
-{ #category : 'rendering' }
-MyPiece >> upFileLegal: aBoolean [
-
-	^ self collectSquares: [ :aSquare | aSquare up ] legal: aBoolean
-]
-
-{ #category : 'rendering' }
-MyPiece >> upLeftDiagonal [
-
-	^ self upLeftDiagonalLegal: false
-]
-
-{ #category : 'rendering' }
-MyPiece >> upLeftDiagonalLegal: aBoolean [
-
-	^ self collectSquares: [ :aSquare | aSquare up ifNotNil: #left ] legal: aBoolean
-]
-
-{ #category : 'rendering' }
-MyPiece >> upRightDiagonal [
-
-	^ self upRightDiagonalLegal: false
-]
-
-{ #category : 'rendering' }
-MyPiece >> upRightDiagonalLegal: aBoolean [
-
-	^ self
-		  collectSquares: [ :aSquare | aSquare up ifNotNil: #right ]
-		  legal: aBoolean
-]
+'From Pharo13.1.0SNAPSHOT of 20 October 2025 [Build information: Pharo-13.1.0+SNAPSHOT.build.707.sha.0d6f109a1a2d906ac9f69ca41e56c022b584bdfd (64 Bit)] on 29 October 2025 at 5:32:13.153 pm'!Object subclass: #MyPiece	instanceVariableNames: 'color square'	classVariableNames: ''	package: 'Myg-Chess-Core'!!MyPiece methodsFor: 'as yet unclassified' stamp: '2025-10-27T22:00:22.1+01:00'!attackingSquares	^ self legalTargetSquares! !!MyPiece methodsFor: 'path commands' stamp: '2025-10-27T22:00:22.101+01:00'!board	^ square board! !!MyPiece methodsFor: 'path commands' stamp: '2025-10-27T22:00:22.109+01:00'!legalTargetSquares	^ self targetSquaresLegal: true! !!MyPiece methodsFor: 'path commands' stamp: '2025-10-27T22:00:22.109+01:00'!moveTo: aSquare	(self legalTargetSquares includes: aSquare) ifFalse: [ ^ self ].	square emptyContents.	square := aSquare.	aSquare contents: self! !!MyPiece methodsFor: 'rendering' stamp: '2025-10-27T22:00:22.101+01:00'!collectSquares: aBlock	^ self collectSquares: aBlock legal: false! !!MyPiece methodsFor: 'rendering' stamp: '2025-10-27T22:00:22.101+01:00'!collectSquares: aBlock legal: shouldBeLegal	^ self collectSquares: aBlock while: [ :aSquare |		  aSquare notNil and: [ shouldBeLegal ==> aSquare hasPiece not ] ]! !!MyPiece methodsFor: 'rendering' stamp: '2025-10-27T22:00:22.103+01:00'!collectSquares: collectBlock while: untilBlock	| targets next |	targets := OrderedCollection new.	"Collect up right"	next := square.	[ untilBlock value: (next := collectBlock value: next) ]		whileTrue: [ targets add: next ].	"If we can it the next piece, then add it too"	(next notNil and: [ next contents color ~= color ]) ifTrue: [ targets add: next ].	^ targets! !!MyPiece methodsFor: 'rendering' stamp: '2025-10-27T22:00:22.104+01:00'!downFile	^ self downFileLegal: false! !!MyPiece methodsFor: 'rendering' stamp: '2025-10-27T22:00:22.104+01:00'!downFileLegal: aBoolean	^ self collectSquares: [ :aSquare | aSquare down ] legal: aBoolean! !!MyPiece methodsFor: 'rendering' stamp: '2025-10-27T22:00:22.105+01:00'!downLeftDiagonal	^ self downLeftDiagonalLegal: false! !!MyPiece methodsFor: 'rendering' stamp: '2025-10-27T22:00:22.105+01:00'!downLeftDiagonalLegal: aBoolean	^ self		  collectSquares: [ :aSquare | aSquare down ifNotNil: #left ]		  legal: aBoolean! !!MyPiece methodsFor: 'rendering' stamp: '2025-10-27T22:00:22.105+01:00'!downRightDiagonal	^ self downRightDiagonalLegal: false! !!MyPiece methodsFor: 'rendering' stamp: '2025-10-27T22:00:22.105+01:00'!downRightDiagonalLegal: aBoolean	^ self		  collectSquares: [ :aSquare | aSquare down ifNotNil: #right ]		  legal: aBoolean! !!MyPiece methodsFor: 'rendering' stamp: '2025-10-27T22:00:22.107+01:00'!leftFile	^ self leftFileLegal: false! !!MyPiece methodsFor: 'rendering' stamp: '2025-10-27T22:00:22.108+01:00'!leftFileLegal: aBoolean	^ self collectSquares: [ :aSquare | aSquare left ] legal: aBoolean! !!MyPiece methodsFor: 'rendering' stamp: '2025-10-27T22:00:22.11+01:00'!rightFile	^ self rightFileLegal: false! !!MyPiece methodsFor: 'rendering' stamp: '2025-10-27T22:00:22.111+01:00'!rightFileLegal: aBoolean	^ self collectSquares: [ :aSquare | aSquare right ] legal: aBoolean! !!MyPiece methodsFor: 'rendering' stamp: '2025-10-27T22:00:22.114+01:00'!targetSquares	^ self targetSquaresLegal: false! !!MyPiece methodsFor: 'rendering' stamp: '2025-10-27T22:00:22.114+01:00'!targetSquaresLegal: aBoolean	self subclassResponsibility! !!MyPiece methodsFor: 'rendering' stamp: '2025-10-27T22:00:22.114+01:00'!upFile	^ self upFileLegal: false! !!MyPiece methodsFor: 'rendering' stamp: '2025-10-27T22:00:22.116+01:00'!upFileLegal: aBoolean	^ self collectSquares: [ :aSquare | aSquare up ] legal: aBoolean! !!MyPiece methodsFor: 'rendering' stamp: '2025-10-27T22:00:22.117+01:00'!upLeftDiagonal	^ self upLeftDiagonalLegal: false! !!MyPiece methodsFor: 'rendering' stamp: '2025-10-27T22:00:22.117+01:00'!upLeftDiagonalLegal: aBoolean	^ self collectSquares: [ :aSquare | aSquare up ifNotNil: #left ] legal: aBoolean! !!MyPiece methodsFor: 'rendering' stamp: '2025-10-27T22:00:22.117+01:00'!upRightDiagonal	^ self upRightDiagonalLegal: false! !!MyPiece methodsFor: 'rendering' stamp: '2025-10-27T22:00:22.118+01:00'!upRightDiagonalLegal: aBoolean	^ self		  collectSquares: [ :aSquare | aSquare up ifNotNil: #right ]		  legal: aBoolean! !!MyPiece methodsFor: 'accessing' stamp: '2025-10-27T22:00:22.103+01:00'!color	^ color! !!MyPiece methodsFor: 'accessing' stamp: '2025-10-27T22:00:22.103+01:00'!color: aColor	color := aColor! !!MyPiece methodsFor: 'accessing' stamp: '2025-10-27T22:00:22.106+01:00'!id	^ 'Q'! !!MyPiece methodsFor: 'accessing' stamp: '2025-10-27T22:00:22.111+01:00'!square	^ square! !!MyPiece methodsFor: 'accessing' stamp: '2025-10-27T22:00:22.111+01:00'!square: aMyChessSquare 		square := aMyChessSquare! !!MyPiece methodsFor: 'testing' stamp: '2025-10-27T22:00:22.106+01:00'!isKing		^ false! !!MyPiece methodsFor: 'testing' stamp: '2025-10-27T22:00:22.107+01:00'!isPiece		^ true! !!MyPiece methodsFor: 'testing' stamp: '2025-10-27T22:00:22.107+01:00'!isWhite		^ color isBlack not! !!MyPiece methodsFor: 'testing' stamp: '2025-10-29T17:30:43.186+01:00'!isOccupied    ^ true! !"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!MyPiece class	instanceVariableNames: ''!!MyPiece class methodsFor: 'constants' stamp: '2025-10-27T22:00:22.1+01:00'!black	^ self new		  color: Color black;		  yourself! !!MyPiece class methodsFor: 'constants' stamp: '2025-10-27T22:00:22.1+01:00'!white	^ self new		  color: Color white;		  yourself! !
