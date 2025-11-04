@@ -67,7 +67,7 @@ MyPlayer >> play [
 			piece := pieces atRandom.
 			pieces remove: piece.
 			legalMoves := self king isInCheck
-				              ifTrue: [ piece legalTargetSquares select: [ :s | piece helpsKing: s ] ]
+				              ifTrue: [ piece legalTargetSquares select: [ :s | piece helpsKing: s aKing: self king] ]
 				              ifFalse: [ piece legalTargetSquares ].
 			legalMoves ifNotEmpty: [
 					game move: piece to: legalMoves atRandom.
