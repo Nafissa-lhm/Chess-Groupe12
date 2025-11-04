@@ -61,9 +61,7 @@ MyPlayer >> pieces [
 MyPlayer >> play [
 
 	| pieces |
-	pieces := self king isInCheck
-		          ifTrue: [ OrderedCollection with: self king ]
-		          ifFalse: [ self pieces copy asOrderedCollection ].
+	pieces := self pieces copy asOrderedCollection.
 
 
 	[ pieces notEmpty ] whileTrue: [
